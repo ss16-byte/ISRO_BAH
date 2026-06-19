@@ -1,0 +1,72 @@
+import React from 'react';
+
+export default function Dashboard() {
+  // Mock data representing the Gemini API response
+  const readinessScore = 42;
+  const currentTasks = [
+    { id: 1, title: "Review Probability & Statistics fundamentals", completed: true },
+    { id: 2, title: "Implement Linear Regression using Scikit-Learn", completed: false },
+    { id: 3, title: "Find a 'good first issue' on GitHub", completed: false },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-950 text-white p-8 font-sans">
+      <header className="mb-10 flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Command Center</h1>
+          <p className="text-gray-400 mt-1">Target: Machine Learning Engineer</p>
+        </div>
+        <button className="bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md font-medium transition-colors">
+          Upgrade to Premium
+        </button>
+      </header>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl">
+          <h3 className="text-sm text-gray-400 font-semibold mb-2">CAREER READINESS</h3>
+          <div className="flex items-end gap-2">
+            <span className="text-4xl font-bold text-indigo-400">{readinessScore}%</span>
+          </div>
+          <div className="w-full bg-gray-800 h-2 rounded-full mt-4">
+            <div className="bg-indigo-500 h-2 rounded-full" style={{ width: `${readinessScore}%` }}></div>
+          </div>
+        </div>
+        
+        <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl">
+          <h3 className="text-sm text-gray-400 font-semibold mb-2">WEEKLY STREAK</h3>
+          <span className="text-4xl font-bold text-orange-400">🔥 4 Days</span>
+          <p className="text-sm text-gray-500 mt-3">Keep it up! Consistency is key.</p>
+        </div>
+
+        <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl">
+          <h3 className="text-sm text-gray-400 font-semibold mb-2">WEEK 3 PROGRESS</h3>
+          <span className="text-4xl font-bold text-emerald-400">1 / 3</span>
+          <p className="text-sm text-gray-500 mt-3">Tasks completed this week.</p>
+        </div>
+      </div>
+
+      <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div className="p-6 border-b border-gray-800">
+          <h2 className="text-xl font-semibold">This Week's Roadmap</h2>
+        </div>
+        <div className="p-6">
+          <ul className="space-y-4">
+            {currentTasks.map((task) => (
+              <li key={task.id} className="flex items-center gap-4">
+                <input 
+                  type="checkbox" 
+                  checked={task.completed}
+                  readOnly
+                  className="w-5 h-5 rounded border-gray-700 bg-gray-800 text-indigo-500 focus:ring-indigo-500"
+                />
+                <span className={`text-lg ${task.completed ? 'text-gray-500 line-through' : 'text-gray-200'}`}>
+                  {task.title}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
